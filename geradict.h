@@ -126,6 +126,11 @@ public:
 	dict(const dict &obj) {
 		dictarr = obj.dictarr;
 	};
+
+	dict(ktype key) {
+		expand(1);
+		dictarr[dictarr.size() - 1] = DictObject<ktype, vtype>(key, 0);
+	};
 	
 	dict(ktype key, vtype value) {
 		expand(1);
@@ -186,5 +191,9 @@ public:
 
 	void reverse() {
 		dictarr.reverse();
+	};
+
+	DictProxy getelem(size_t index) {
+		return DictProxy(*this, dictarr[index].key);
 	};
 };
